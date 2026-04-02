@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base global ── */
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply font-raleway bg-creme overflow-x-hidden; }
+  h1, h2, h3, h4, h5, h6 { @apply font-cinzel; }
+}
+
+/* ── Componentes reutilizáveis ── */
+@layer components {
+
+  /* Animações de entrada por scroll */
+  .animar-entrada {
+    @apply opacity-0 translate-y-5 transition-all duration-[600ms] ease-out;
+  }
+  .animar-entrada.visivel {
+    @apply opacity-100 translate-y-0;
+  }
+
+  /* Hero slideshow */
+  .hero-slide {
+    @apply absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-[1200ms] ease-in-out;
+  }
+  .hero-slide.ativo { @apply opacity-100; }
+
+  /* Nav link underline animado */
+  .nav-link { @apply relative pb-1; }
+  .nav-link::after {
+    content: '';
+    @apply absolute w-0 h-[3px] -bottom-1 left-0 bg-dourado transition-all duration-300;
+  }
+  .nav-link:hover::after,
+  .nav-link.nav-ativo::after { @apply w-full; }
+  .nav-link.nav-ativo { @apply !text-dourado; }
+
+  /* Header sombra ao scroll */
+  #header.scrolled {
+    box-shadow: 0 4px 12px rgba(212, 168, 68, 0.15);
+  }
+
+  /* Botão primário */
+  .btn-primario {
+    @apply inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+    background: linear-gradient(135deg, #1A2FA0, #2a44c8);
+  }
+
+  /* Botão secundário outline */
+  .btn-secundario {
+    @apply inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-white transition-all duration-300 hover:-translate-y-1;
+    border: 2px solid rgba(255,255,255,0.4);
+  }
+  .btn-secundario:hover {
+    border-color: #D4A844;
+    background: rgba(212,168,68,0.1);
+  }
+
+  /* Label de seção */
+  .section-tag {
+    @apply inline-block text-xs font-bold uppercase mb-2;
+    letter-spacing: 4px;
+    color: #a07a28;
+  }
+
+  /* Card de culto */
+  .card-culto {
+    @apply rounded-xl p-6 text-center transition-all duration-300 hover:-translate-y-2;
+    background: #1A2FA0;
+    color: #ffffff;
+    border-top: 4px solid #D4A844;
+  }
+
+  /* Glass morphism */
+  .bg-glass {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  /* Gradiente de texto dourado */
+  .text-gradient-dourado {
+    background: linear-gradient(135deg, #D4A844, #e8c870, #D4A844);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}

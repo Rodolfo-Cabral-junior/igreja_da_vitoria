@@ -1,0 +1,12 @@
+{
+  "name": "igreja-da-vitoria",
+  "version": "1.0.0",
+  "description": "Site institucional da Igreja da Vitória — Jaraguá/GO",
+  "scripts": {
+    "build": "tailwindcss -i ./assets/css/input.css -o ./assets/css/style.css --minify",
+    "dev": "tailwindcss -i ./assets/css/input.css -o ./assets/css/style.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

@@ -1,0 +1,55 @@
+# Node modules
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Dependencies
+composer.phar
+vendor/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build
+dist/
+build/
+
+# Cache
+.cache/
+*.cache
+
+# Logs
+logs/
+*.log
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.tmp
+*.temp
+
+# Versioning - keep only main version
+VERSÃO-01/
+VERSÃO-02/
+VERSÃO-03/
+VERSÃO-04/
+VERSÃO-06/
+PROJETO IGREJA DA VITORIA/
+
+# Backup
+backup/
+*.backup
