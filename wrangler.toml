@@ -1,0 +1,34 @@
+name = "igreja-da-vitoria"
+type = "javascript"
+account_id = ""
+workers_dev = true
+route = ""
+zone_id = ""
+
+# Variáveis de ambiente
+[env.production]
+name = "igreja-da-vitoria-prod"
+route = "api.igrejadavitoria.com.br/*"
+
+[env.staging]
+name = "igreja-da-vitoria-staging"
+workers_dev = true
+
+# KV Namespaces (comentado - ativar conforme necessário)
+# [[kv_namespaces]]
+# binding = "CACHE"
+# preview_id = ""
+# id = ""
+
+# Scripts e workers personalizados
+[build]
+command = "npm run build"
+
+# Variáveis globais
+[env.production.vars]
+ENVIRONMENT = "production"
+API_BASE_URL = "https://api.igrejadavitoria.com.br"
+
+[env.staging.vars]
+ENVIRONMENT = "staging"
+API_BASE_URL = "https://staging-api.igrejadavitoria.com.br"
