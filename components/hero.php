@@ -2,46 +2,19 @@
 require_once __DIR__ . '/../config/site.php';
 require_once __DIR__ . '/../config/colors.php';
 
-$heroImages = [
-  'Screenshot_2',
-  'Screenshot_3',
-  'Screenshot_5',
-  'Screenshot_6',
-  'Screenshot_7',
-  'Screenshot_8',
-  'Screenshot_9',
-  'Screenshot_11',
-  'Screenshot_13',
-  'Screenshot_15',
-  'Screenshot_17',
-  'Screenshot_18',
-  'Screenshot_23',
-  'Screenshot_26',
-  'Screenshot_28',
-  'Screenshot_29',
-  'Screenshot_30',
-  'Screenshot_31',
-  'Screenshot_32',
-];
+// Detecta automaticamente as imagens do hero — sem lista hardcoded
+$arquivos_hero = glob(__DIR__ . '/../assets/images/hero/*.webp');
+sort($arquivos_hero);
+$heroImages  = array_map(fn($f) => 'assets/images/hero/' . basename($f), $arquivos_hero);
 $totalSlides = count($heroImages);
 ?>
 
 <section class="mt-[76px] min-h-[600px] relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-azul-escuro via-azul to-azul-claro">
 
-  <style>
-    .hero-slide {
-      opacity: 0;
-    }
-
-    .hero-slide.ativo {
-      opacity: 1;
-    }
-  </style>
-
   <div id="hero-slides" class="absolute inset-0 z-0 overflow-hidden">
     <?php foreach ($heroImages as $i => $img): ?>
       <div class="hero-slide <?php echo $i === 0 ? 'ativo' : ''; ?>"
-        style="background-image:url('assets/images/hero/<?php echo $img; ?>.webp');">
+        style="background-image:url('<?php echo htmlspecialchars($img); ?>');">
       </div>
     <?php endforeach; ?>
   </div>

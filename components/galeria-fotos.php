@@ -16,6 +16,9 @@ $fotos = [
     ['url' => 'assets/images/galeria/foto11.webp', 'titulo' => 'Crescimento Espiritual', 'descricao' => 'Jornada de fé'],
     ['url' => 'assets/images/galeria/foto12.webp', 'titulo' => 'Bênção e Graça', 'descricao' => 'Missão realizada'],
 ];
+
+// Filtra apenas as fotos cujo arquivo existe — evita imagens quebradas
+$fotos = array_filter($fotos, fn($f) => file_exists(__DIR__ . '/../' . $f['url']));
 ?>
 
 <style>
@@ -29,7 +32,6 @@ $fotos = [
     overflow: hidden;
     border-radius: 12px;
     height: 280px;
-    cursor: pointer;
     box-shadow: 0 4px 15px rgba(26, 47, 160, 0.1);
     transition: all 0.3s ease;
   }

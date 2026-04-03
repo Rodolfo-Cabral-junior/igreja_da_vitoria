@@ -217,7 +217,8 @@ window.redirectToWhatsApp = function (event) {
         if (!validar()) return;
 
         const tel = document.getElementById('oracao-telefone')?.value.trim() ?? '';
-        const numero = CONFIG.WHATSAPP_NUMBER;
+        // Extrai o número do primeiro link wa.me existente na página — sem hardcode
+        const numero = document.querySelector('a[href*="wa.me"]')?.getAttribute('href')?.match(/wa\.me\/(\d+)/)?.[1] ?? '';
         const nome = campos.nome.el.value.trim();
         const assunto = campos.assunto.el.value.trim();
         const mensagem = campos.mensagem.el.value.trim();

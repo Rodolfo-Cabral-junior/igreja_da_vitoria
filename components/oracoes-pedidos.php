@@ -79,8 +79,8 @@ $grupos = [
 
 <style>
     .campo-erro {
-        border-color: var(--cor-vermelho) !important;
-        box-shadow: 0 0 0 2px color-mix(in srgb, var(--cor-vermelho) 15%, transparent) !important;
+        border-color: var(--vermelho) !important;
+        box-shadow: 0 0 0 2px color-mix(in srgb, var(--vermelho) 15%, transparent) !important;
     }
 
     .msg-erro {
@@ -173,7 +173,7 @@ $grupos = [
 
                     <hr class="border-t border-black/[0.08] mb-4">
 
-                    <a href="<?php echo htmlspecialchars($site['whatsapp_link']); ?>?text=<?php echo $grupo['whatsMsg']; ?>"
+                    <a href="<?php echo htmlspecialchars($site['whatsapp_link']); ?>?text=<?php echo htmlspecialchars($grupo['whatsMsg']); ?>"
                         target="_blank" rel="noopener noreferrer"
                         class="inline-flex items-center justify-center w-full gap-2 px-4 py-2.5 rounded-full text-white
                           font-raleway font-bold text-[13px] transition-all duration-300 hover:shadow-lg hover:scale-105 relative z-[1]

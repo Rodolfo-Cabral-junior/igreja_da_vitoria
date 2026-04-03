@@ -58,7 +58,7 @@ $corConfig = [
 
             <!-- Card AO VIVO (fixo) -->
             <article class="group animar-entrada flex flex-col bg-white border border-black/10 border-t-4 border-t-vermelho hover:border-vermelho rounded-[20px] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                <a href="https://www.youtube.com/@igrejadavitoriajaragua/streams"
+                <a href="<?php echo htmlspecialchars(rtrim($site['redes_sociais']['youtube']['url'], '/') . '/streams'); ?>"
                     target="_blank" rel="noopener noreferrer" class="flex flex-col flex-1">
                     <div class="relative h-44 overflow-hidden flex-shrink-0">
                         <img src="assets/images/noticias/ao-vivo.jpg"

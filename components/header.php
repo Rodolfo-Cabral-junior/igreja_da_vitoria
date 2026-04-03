@@ -46,7 +46,7 @@ require_once __DIR__ . '/../config/colors.php';
                     Ministérios
                     <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-dourado to-dourado-claro scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full"></span>
                 </a>
-                <a href="javascript:void(0);" onclick="redirectToWhatsApp(event)" class="nav-link px-3 py-2 text-sm font-medium text-gray-200 transition-all duration-300 rounded-lg hover:text-dourado hover:bg-dourado/10 relative group cursor-pointer">
+                <a href="#" onclick="redirectToWhatsApp(event)" class="nav-link px-3 py-2 text-sm font-medium text-gray-200 transition-all duration-300 rounded-lg hover:text-dourado hover:bg-dourado/10 relative group cursor-pointer">
                     Contato
                     <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-dourado to-dourado-claro scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full"></span>
                 </a>
@@ -54,7 +54,7 @@ require_once __DIR__ . '/../config/colors.php';
 
             <!-- Botão Contato + Oferta + Menu Mobile Toggle -->
             <div class="flex items-center gap-3">
-                <a href="javascript:void(0);" onclick="redirectToWhatsApp(event)" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-vermelho to-vermelho-escuro text-white font-medium text-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 group cursor-pointer">
+                <a href="#" onclick="redirectToWhatsApp(event)" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-vermelho to-vermelho-escuro text-white font-medium text-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 group cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 group-hover:scale-110 transition-transform">
                         <path d="M17.507 14.828l-.469 2.04a.997.997 0 01-.979.826c-.556 0-1.097-.086-1.617-.254-5.107-1.635-9.455-5.983-11.09-11.09-.168-.52-.254-1.061-.254-1.617a.997.997 0 01.826-.979l2.04-.469a.998.998 0 01.978.263l1.295 1.88a.998.998 0 01.063 1.083l-.711 1.42c.69 1.653 2.118 3.082 3.77 3.77l1.42-.711a.998.998 0 011.083.063l1.88 1.295a.997.997 0 01.263.978z" />
                     </svg>
@@ -88,7 +88,7 @@ require_once __DIR__ . '/../config/colors.php';
                 <a href="#ministerios" class="px-4 py-2.5 rounded-lg text-sm font-medium text-gray-200 transition-all hover:text-dourado hover:bg-dourado/10">Ministérios</a>
                 <a href="#endereco" class="px-4 py-2.5 rounded-lg text-sm font-medium text-gray-200 transition-all hover:text-dourado hover:bg-dourado/10">Localização</a>
                 <div class="flex gap-2 mt-3 px-2">
-                    <a href="javascript:void(0);" onclick="redirectToWhatsApp(event)" class="flex-1 px-3 py-2.5 rounded-full bg-gradient-to-r from-vermelho to-vermelho-escuro text-white font-medium text-xs text-center transition-all hover:shadow-lg cursor-pointer">Contato</a>
+                    <a href="#" onclick="redirectToWhatsApp(event)" class="flex-1 px-3 py-2.5 rounded-full bg-gradient-to-r from-vermelho to-vermelho-escuro text-white font-medium text-xs text-center transition-all hover:shadow-lg cursor-pointer">Contato</a>
                     <a href="#dizimos" class="flex-1 px-3 py-2.5 rounded-full bg-gradient-to-r from-vermelho to-vermelho-escuro text-white font-medium text-xs text-center transition-all hover:shadow-lg">Oferta</a>
                 </div>
             </div>

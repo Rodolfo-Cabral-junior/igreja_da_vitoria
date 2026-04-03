@@ -53,7 +53,7 @@ require_once __DIR__ . '/../config/site.php';
                         </span>
                         <button
                             class="bg-azul border-none text-white cursor-pointer p-1.5 rounded-md flex items-center justify-center shrink-0 transition-colors duration-150 hover:bg-azul-claro"
-                            onclick="copyToClipboard(this, '<?php echo htmlspecialchars($site['pix_chave']); ?>')"
+                            onclick="copyToClipboard(this, <?php echo json_encode($site['pix_chave']); ?>)"
                             title="Copiar chave Pix"
                             aria-label="Copiar chave Pix">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true">

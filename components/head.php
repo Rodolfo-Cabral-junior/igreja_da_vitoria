@@ -18,13 +18,13 @@ require_once __DIR__ . '/../config/colors.php';
     <meta property="og:title" content="<?php echo htmlspecialchars($site['nome']); ?>">
     <meta property="og:description" content="<?php echo htmlspecialchars($site['slogan']); ?>">
     <meta property="og:image" content="/assets/images/logo/logo.png">
-    <meta property="og:url" content="https://<?php echo $_SERVER['HTTP_HOST']; ?>">
+    <meta property="og:url" content="https://<?php echo htmlspecialchars($_SERVER['HTTP_HOST'], ENT_QUOTES); ?>">
     <meta property="og:locale" content="pt_BR">
 
     <title><?php echo htmlspecialchars($site['nome']); ?> — <?php echo htmlspecialchars($site['localizacao']['cidade']); ?></title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/assets/images/logo/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/assets/images/logo/favicon.ico">
     <link rel="apple-touch-icon" href="/assets/images/logo/logo.png">
 
     <!-- Google Fonts: Cinzel + Raleway -->
