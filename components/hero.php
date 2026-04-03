@@ -3,22 +3,46 @@ require_once __DIR__ . '/../config/site.php';
 require_once __DIR__ . '/../config/colors.php';
 
 $heroImages = [
-    'Screenshot_2', 'Screenshot_3', 'Screenshot_5', 'Screenshot_6',
-    'Screenshot_7', 'Screenshot_8', 'Screenshot_9', 'Screenshot_11',
-    'Screenshot_13', 'Screenshot_15', 'Screenshot_17', 'Screenshot_18',
-    'Screenshot_23', 'Screenshot_26', 'Screenshot_28', 'Screenshot_29',
-    'Screenshot_30', 'Screenshot_31', 'Screenshot_32',
+  'Screenshot_2',
+  'Screenshot_3',
+  'Screenshot_5',
+  'Screenshot_6',
+  'Screenshot_7',
+  'Screenshot_8',
+  'Screenshot_9',
+  'Screenshot_11',
+  'Screenshot_13',
+  'Screenshot_15',
+  'Screenshot_17',
+  'Screenshot_18',
+  'Screenshot_23',
+  'Screenshot_26',
+  'Screenshot_28',
+  'Screenshot_29',
+  'Screenshot_30',
+  'Screenshot_31',
+  'Screenshot_32',
 ];
 $totalSlides = count($heroImages);
 ?>
 
 <section class="mt-[76px] min-h-[600px] relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-azul-escuro via-azul to-azul-claro">
 
+  <style>
+    .hero-slide {
+      opacity: 0;
+    }
+
+    .hero-slide.ativo {
+      opacity: 1;
+    }
+  </style>
+
   <div id="hero-slides" class="absolute inset-0 z-0 overflow-hidden">
     <?php foreach ($heroImages as $i => $img): ?>
-    <div class="hero-slide <?php echo $i === 0 ? 'ativo' : ''; ?>"
-         style="background-image:url('assets/images/hero/<?php echo $img; ?>.webp'); opacity:<?php echo $i === 0 ? '1' : '0'; ?>;">
-    </div>
+      <div class="hero-slide <?php echo $i === 0 ? 'ativo' : ''; ?>"
+        style="background-image:url('assets/images/hero/<?php echo $img; ?>.webp');">
+      </div>
     <?php endforeach; ?>
   </div>
 
@@ -30,14 +54,14 @@ $totalSlides = count($heroImages);
   </div>
 
   <div class="absolute bottom-0 left-0 right-0 h-20 bg-white z-[2]"
-       style="clip-path:polygon(0% 40%, 100% 20%, 100% 100%, 0% 100%);"></div>
+    style="clip-path:polygon(0% 40%, 100% 20%, 100% 100%, 0% 100%);"></div>
 
   <div class="relative z-[3] text-center px-5 pt-20 pb-[120px] max-w-[1000px] mx-auto">
 
     <div class="animate-fadeDown inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full border border-dourado/40 bg-white/[0.08] backdrop-blur-sm text-dourado-claro text-[12px] tracking-[3px] uppercase font-medium hover:border-dourado/70 transition-all">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
-        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-        <circle cx="12" cy="10" r="3"/>
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+        <circle cx="12" cy="10" r="3" />
       </svg>
       <?php echo htmlspecialchars($site['localizacao']['cidade']); ?> · <?php echo htmlspecialchars($site['localizacao']['estado']); ?>
     </div>
@@ -55,8 +79,8 @@ $totalSlides = count($heroImages);
       <a href="#endereco" class="group relative px-10 py-4 rounded-full font-bold text-sm text-titulo bg-gradient-to-br from-dourado to-dourado-escuro shadow-lg transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl overflow-hidden">
         <span class="relative z-10 flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-            <circle cx="12" cy="10" r="3"/>
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+            <circle cx="12" cy="10" r="3" />
           </svg>
           Venha nos Visitar
         </span>
@@ -65,10 +89,10 @@ $totalSlides = count($heroImages);
       <a href="#cultos" class="group px-10 py-4 rounded-full font-semibold text-sm text-white bg-white/10 backdrop-blur-sm border-2 border-white/30 transition-all duration-300 hover:border-dourado hover:bg-dourado/20 hover:-translate-y-1.5 hover:shadow-lg">
         <span class="flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-            <line x1="16" y1="2" x2="16" y2="6"/>
-            <line x1="8" y1="2" x2="8" y2="6"/>
-            <line x1="3" y1="10" x2="21" y2="10"/>
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
           </svg>
           Nossos Cultos
         </span>
@@ -78,10 +102,10 @@ $totalSlides = count($heroImages);
 
   <div class="absolute bottom-[100px] left-0 right-0 flex justify-center gap-2 z-[4]">
     <?php for ($i = 0; $i < $totalSlides; $i++): ?>
-    <button class="hero-dot w-2.5 h-2.5 rounded-full border-none cursor-pointer p-0 transition-all duration-300 backdrop-blur-sm"
-            style="background:<?php echo $i === 0 ? '#D4A844' : 'rgba(255,255,255,0.25)'; ?>; transform:<?php echo $i === 0 ? 'scaleX(1.8)' : 'scaleX(1)'; ?>;"
-            aria-label="Ir para slide <?php echo $i + 1; ?>">
-    </button>
+      <button class="hero-dot w-2.5 h-2.5 rounded-full border-none cursor-pointer p-0 transition-all duration-300 backdrop-blur-sm"
+        style="background:<?php echo $i === 0 ? '#D4A844' : 'rgba(255,255,255,0.25)'; ?>; transform:<?php echo $i === 0 ? 'scaleX(1.8)' : 'scaleX(1)'; ?>;"
+        aria-label="Ir para slide <?php echo $i + 1; ?>">
+      </button>
     <?php endfor; ?>
   </div>
 

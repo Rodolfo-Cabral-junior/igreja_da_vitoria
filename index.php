@@ -64,55 +64,28 @@ require_once 'config/colors.php';
 
         </div>
 
-        <!-- Seção 1.5: Banner Rotativo -->
-        <section id="banner-rotativo">
-            <?php include 'components/banner-rotativo.php'; ?>
-        </section>
+        <?php include 'components/banner-rotativo.php'; ?>
 
-        <!-- Seção 2: Cultos -->
-        <section id="cultos">
-            <?php include 'components/cultos.php'; ?>
-        </section>
+        <?php include 'components/cultos.php'; ?>
 
-        <!-- Seção 2.5: Galeria de Fotos -->
-        <section id="galeria-fotos">
-            <?php include 'components/galeria-fotos.php'; ?>
-        </section>
+        <?php include 'components/galeria-fotos.php'; ?>
 
-        <!-- Seção 2.8: Orações -->
-        <section id="oracoes">
-            <?php include 'components/oracoes-pedidos.php'; ?>
-        </section>
+        <?php include 'components/oracoes-pedidos.php'; ?>
 
-        <!-- Seção 3: Visão e Valores -->
-        <section id="nossa-visao">
-            <?php include 'components/visao.php'; ?>
-        </section>
+        <?php include 'components/visao.php'; ?>
 
-        <!-- Seção 3.5: Ministérios -->
-        <section id="ministerios">
-            <?php include 'components/ministerios.php'; ?>
-        </section>
+        <?php include 'components/ministerios.php'; ?>
 
-        <!-- Seção 4: Equipe Pastoral -->
-        <section id="equipe-pastoral">
-            <?php include 'components/pastoral.php'; ?>
-        </section>
+        <?php include 'components/pastoral.php'; ?>
 
-        <!-- Seção 5: Localização e Contato -->
+        <!-- Âncora para navegação — o componente usa id="endereco-section" internamente -->
         <section id="endereco">
             <?php include 'components/endereco.php'; ?>
         </section>
 
-        <!-- Seção 6: Dízimos e Ofertas -->
-        <section id="dizimos">
-            <?php include 'components/dizimos.php'; ?>
-        </section>
+        <?php include 'components/dizimos.php'; ?>
 
-        <!-- Seção 7: Notícias e Mensagens -->
-        <section id="noticias">
-            <?php include 'components/noticias.php'; ?>
-        </section>
+        <?php include 'components/noticias.php'; ?>
     </main>
 
     <?php include 'components/footer.php'; ?>

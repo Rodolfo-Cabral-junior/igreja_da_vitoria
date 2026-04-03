@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ssh -T git@github.com)",
+      "Bash(gh auth:*)",
+      "Read(//c/Users/H-COORDTI/.ssh/**)",
+      "Bash(php -l index.php)",
+      "Bash(grep -n \"redirectToWhatsApp\" \"e:/IGREJA DA VITORIA/components\"/*.php)",
+      "Bash(grep -n \"img src=\" \"e:/IGREJA DA VITORIA/components\"/*.php)",
+      "Bash(grep -n \"style=\\\\\"background:\" \"e:/IGREJA DA VITORIA/components\"/*.php)",
+      "Bash(grep -n \"border-t-4\" \"e:/IGREJA DA VITORIA/components\"/*.php)",
+      "Bash(grep -c \"path d=\\\\\"M17.472 14.382\" \"e:/IGREJA DA VITORIA/components\"/*.php)",
+      "Bash(grep -rn \"window\\\\\\\\.ORACAO_WHATS\\\\|window\\\\\\\\.irPara\" \"e:/IGREJA DA VITORIA\")",
+      "Bash(php -l components/endereco.php)",
+      "Bash(php -l components/oracoes-pedidos.php)",
+      "Bash(php -l config/site.php)"
+    ],
+    "additionalDirectories": [
+      "e:\\IGREJA DA VITORIA"
+    ]
+  }
+}

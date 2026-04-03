@@ -66,14 +66,14 @@ $fotos = [
   }
 </style>
 
-<section id="galeria-fotos" class="py-16" style="background: #F8F6F1;">
+<section id="galeria-fotos" class="bg-creme py-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <div class="text-center mb-12">
-      <span class="text-xs font-bold tracking-widest uppercase" style="color: <?php echo COR_DOURADO; ?>;">
+      <span class="text-dourado text-xs font-bold tracking-widest uppercase">
         ✦ Memórias
       </span>
-      <h2 class="text-4xl font-bold mt-3" style="color: <?php echo COR_AZUL; ?>;">
+      <h2 class="text-azul text-4xl font-bold mt-3">
         Galeria de Fotos
       </h2>
       <p class="text-gray-600 mt-3 max-w-2xl mx-auto">
@@ -99,8 +99,7 @@ $fotos = [
     <div class="text-center mt-12">
       <a href="<?php echo htmlspecialchars($site['redes_sociais']['instagram']['url']); ?>"
          target="_blank" rel="noopener noreferrer"
-         class="inline-block px-8 py-3 rounded-full text-white font-medium transition-all duration-300 hover:-translate-y-1"
-         style="background: <?php echo COR_AZUL; ?>; box-shadow: 0 10px 25px -5px rgba(26,47,160,0.3);">
+         class="inline-block px-8 py-3 rounded-full bg-azul text-white font-medium shadow-[0_10px_25px_-5px_rgba(26,47,160,0.3)] transition-all duration-300 hover:-translate-y-1">
         📸 Veja mais no Instagram
       </a>
     </div>

@@ -115,8 +115,7 @@ $grupos = [
 
         <!-- Grid de Grupos -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
-            <?php $idx = 0;
-            foreach ($grupos as $grupo): ?>
+            <?php foreach ($grupos as $idx => $grupo): ?>
                 <div class="animar-entrada group relative bg-white rounded-2xl shadow-lg p-9 overflow-hidden
                         border border-black/[0.06] border-t-4 <?php echo $grupo['corBorder']; ?>
                         transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
@@ -191,8 +190,7 @@ $grupos = [
                         Participar
                     </a>
                 </div>
-            <?php $idx++;
-            endforeach; ?>
+            <?php endforeach; ?>
         </div>
 
         <!-- Formulário de Pedido de Oração -->
@@ -289,7 +287,3 @@ $grupos = [
     </div>
 </section>
 
-<?php $whatsNumero = $site['telefone_internacional']; ?>
-<script>
-    window.ORACAO_WHATS = '<?php echo $whatsNumero; ?>';
-</script>

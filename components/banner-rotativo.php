@@ -2,9 +2,9 @@
 require_once __DIR__ . '/../config/site.php';
 require_once __DIR__ . '/../config/colors.php';
 
-$banners_webp = array_map(function($banner) {
-    $banner['imagem'] = preg_replace('/\.(jpeg|jpg|png)$/i', '.webp', $banner['imagem']);
-    return $banner;
+$banners_webp = array_map(function ($banner) {
+  $banner['imagem'] = preg_replace('/\.(jpeg|jpg|png)$/i', '.webp', $banner['imagem']);
+  return $banner;
 }, $banners);
 ?>
 
@@ -17,6 +17,7 @@ $banners_webp = array_map(function($banner) {
     border-radius: 12px;
     box-shadow: 0 10px 40px rgba(26, 47, 160, 0.2);
   }
+
   .carousel-slide {
     position: absolute;
     width: 100%;
@@ -25,8 +26,13 @@ $banners_webp = array_map(function($banner) {
     transition: opacity 0.8s ease-in-out;
     background-size: cover;
     background-position: center;
+    background-color: #f5f5f5;
   }
-  .carousel-slide.ativo { opacity: 1; }
+
+  .carousel-slide.ativo {
+    opacity: 1;
+  }
+
   .carousel-controls {
     position: absolute;
     bottom: 20px;
@@ -36,17 +42,26 @@ $banners_webp = array_map(function($banner) {
     gap: 10px;
     z-index: 10;
   }
+
   .carousel-dot {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.5);
+    background: rgba(255, 255, 255, 0.5);
     cursor: pointer;
     transition: all 0.3s ease;
     border: 2px solid transparent;
   }
-  .carousel-dot.ativo { background: white; transform: scale(1.2); }
-  .carousel-dot:hover { background: rgba(255,255,255,0.8); }
+
+  .carousel-dot.ativo {
+    background: white;
+    transform: scale(1.2);
+  }
+
+  .carousel-dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
+
   .carousel-arrow {
     position: absolute;
     top: 50%;
@@ -65,12 +80,30 @@ $banners_webp = array_map(function($banner) {
     transition: all 0.3s ease;
     border-radius: 50%;
   }
-  .carousel-arrow:hover { background: rgba(26, 47, 160, 0.95); transform: translateY(-50%) scale(1.1); }
-  .carousel-arrow.prev { left: 15px; }
-  .carousel-arrow.next { right: 15px; }
+
+  .carousel-arrow:hover {
+    background: rgba(26, 47, 160, 0.95);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .carousel-arrow.prev {
+    left: 15px;
+  }
+
+  .carousel-arrow.next {
+    right: 15px;
+  }
+
   @media (max-width: 768px) {
-    .carousel-container { height: 280px; }
-    .carousel-arrow { width: 40px; height: 40px; font-size: 18px; }
+    .carousel-container {
+      height: 280px;
+    }
+
+    .carousel-arrow {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+    }
   }
 </style>
 
@@ -78,10 +111,10 @@ $banners_webp = array_map(function($banner) {
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <div class="text-center mb-8">
-      <span class="text-xs font-bold tracking-widest uppercase" style="color: <?php echo COR_DOURADO; ?>;">
+      <span class="text-dourado text-xs font-bold tracking-widest uppercase">
         ✦ Galeria de Momentos
       </span>
-      <h2 class="text-4xl font-bold mt-3" style="color: <?php echo COR_AZUL; ?>;">
+      <h2 class="text-azul text-4xl font-bold mt-3">
         Nossos Eventos & Celebrações
       </h2>
       <p class="text-gray-600 mt-3 max-w-2xl mx-auto">
@@ -100,8 +133,8 @@ $banners_webp = array_map(function($banner) {
         </div>
       <?php endforeach; ?>
 
-      <button class="carousel-arrow prev" data-carousel-prev aria-label="Slide anterior">❮</button>
-      <button class="carousel-arrow next" data-carousel-next aria-label="Próximo slide">❯</button>
+      <button class="carousel-arrow prev" data-carousel-prev aria-label="Slide anterior" title="Slide anterior">❮</button>
+      <button class="carousel-arrow next" data-carousel-next aria-label="Próximo slide" title="Próximo slide">❯</button>
 
       <div class="carousel-controls">
         <?php foreach ($banners_webp as $i => $banner): ?>

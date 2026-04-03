@@ -29,7 +29,9 @@ require_once __DIR__ . '/../config/site.php';
 
                     <!-- Ícone -->
                     <div class="w-[52px] h-[52px] rounded-full bg-dourado/10 text-dourado flex items-center justify-center mb-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" aria-hidden="true">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                        </svg>
                     </div>
 
                     <h3 class="font-cinzel text-[20px] font-bold text-titulo mb-1.5">Escaneie para Ofertar</h3>
@@ -37,7 +39,9 @@ require_once __DIR__ . '/../config/site.php';
 
                     <!-- QR Code placeholder -->
                     <div class="w-full aspect-square max-w-[200px] mx-auto mb-6 bg-bege border-2 border-dashed border-black/15 rounded-xl flex flex-col items-center justify-center gap-2 text-terciario text-[11px]">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-9 h-9 text-dourado-escuro" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-9 h-9 text-dourado-escuro" aria-hidden="true">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                        </svg>
                         Espaço para QR Code Pix
                     </div>
 
@@ -49,10 +53,13 @@ require_once __DIR__ . '/../config/site.php';
                         </span>
                         <button
                             class="bg-azul border-none text-white cursor-pointer p-1.5 rounded-md flex items-center justify-center shrink-0 transition-colors duration-150 hover:bg-azul-claro"
-                            onclick="navigator.clipboard.writeText('<?php echo htmlspecialchars($site['pix_chave']); ?>').then(()=>{ this.style.color='#4A6AFF'; setTimeout(()=>this.style.color='', 1500); })"
+                            onclick="copyToClipboard(this, '<?php echo htmlspecialchars($site['pix_chave']); ?>')"
                             title="Copiar chave Pix"
                             aria-label="Copiar chave Pix">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                            </svg>
                         </button>
                     </div>
                     <p class="text-[11px] text-terciario">Clique no ícone para copiar a chave</p>

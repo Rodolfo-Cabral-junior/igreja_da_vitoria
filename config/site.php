@@ -17,8 +17,8 @@ $site = [
         'estado' => 'Goiás',
         'pais' => 'Brasil',
         'endereco_completo' => 'Rua José M. Francisco q, 07 - LT 13 - Setor Aeroporto, Jaraguá - GO, 76330-000',
-        'latitude' => -15.8271,
-        'longitude' => -49.0667,
+        'latitude' => -15.7614,
+        'longitude' => -49.3283,
     ],
 
     // Liderança
@@ -57,7 +57,6 @@ $site = [
     // Contato direto
     'telefone' => '62 98480-5993',
     'telefone_internacional' => '5562984805993',
-    'whatsapp' => '62 98480-5993',
     'whatsapp_link' => 'https://wa.me/5562984805993',
 
     // Chave Pix

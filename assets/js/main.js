@@ -1,14 +1,56 @@
 ﻿// ── CONSTANTES GLOBAIS ───────────────────────────────────────────────────────
 const CONFIG = {
-    WHATSAPP_NUMBER: '5562984805993',
     CAROUSEL_INTERVAL: 5000,
 };
+
+// ── Menu Mobile Toggle ────────────────────────────────────────────────────────
+window.toggleMenu = function () {
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    if (!btn || !menu) return;
+
+    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', !isExpanded);
+    menu.classList.toggle('hidden');
+};
+
+// ── Clipboard com Fallback ───────────────────────────────────────────────────
+window.copyToClipboard = function (btn, text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+            btn.style.color = '#4A6AFF';
+            setTimeout(() => { btn.style.color = ''; }, 1500);
+        }).catch(() => fallbackCopy(btn, text));
+    } else {
+        fallbackCopy(btn, text);
+    }
+};
+
+function fallbackCopy(btn, text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+        document.execCommand('copy');
+        btn.style.color = '#4A6AFF';
+        setTimeout(() => { btn.style.color = ''; }, 1500);
+    } catch (err) {
+        console.error('Falha ao copiar:', err);
+    }
+    document.body.removeChild(textarea);
+}
 
 // ── Redirecionamento para WhatsApp (otimizado) ────────────────────────────────
 window.redirectToWhatsApp = function (event) {
     event?.preventDefault();
-    const mensagem = encodeURIComponent('Olá! Gostaria de mais informações sobre a Igreja da Vitória.');
-    window.location.href = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${mensagem}`;
+    // Extrai o WhatsApp link do primeiro elemento com href que contem wa.me
+    const whatsappLink = document.querySelector('a[href*="wa.me"]')?.getAttribute('href');
+    if (whatsappLink) {
+        window.location.href = whatsappLink;
+    }
 };
 
 // ── Hero Slideshow ────────────────────────────────────────────────────────────
@@ -32,13 +74,11 @@ window.redirectToWhatsApp = function (event) {
         dots[atual].style.transform = 'scaleX(1.8)';
     }
 
-    window.irPara = irPara;
-
     function avancar() { irPara(atual + 1); }
 
     function reiniciarIntervalo() {
         clearInterval(intervalo);
-        intervalo = setInterval(avancar, 5000);
+        intervalo = setInterval(avancar, CONFIG.CAROUSEL_INTERVAL);
     }
 
     dots.forEach((dot, i) => {
@@ -66,12 +106,12 @@ window.redirectToWhatsApp = function (event) {
         atual = (idx + slides.length) % slides.length;
 
         slides[atual].classList.add('ativo');
-        dots[atual]?.classList.add('ativo'); CONFIG.CAROUSEL_INTERVAL
+        dots[atual]?.classList.add('ativo');
     }
 
     function reiniciarIntervalo() {
         clearInterval(intervalo);
-        intervalo = setInterval(() => irPara(atual + 1), 5000);
+        intervalo = setInterval(() => irPara(atual + 1), CONFIG.CAROUSEL_INTERVAL);
     }
 
     dots.forEach((dot) => {
