@@ -1,9 +1,20 @@
 ﻿// ── CONSTANTES GLOBAIS ───────────────────────────────────────────────────────
+/**
+ * CONFIG global — fonte única de verdade para valores reutilizados
+ * - CAROUSEL_INTERVAL: tempo (ms) entre slides automáticos
+ */
 const CONFIG = {
     CAROUSEL_INTERVAL: 5000,
 };
 
 // ── Menu Mobile Toggle ────────────────────────────────────────────────────────
+/**
+ * Alterna visibilidade do menu mobile e sincroniza aria-expanded
+ * Garante acessibilidade WCAG 2.1 AA para leitores de tela
+ * 
+ * Uso: <button onclick="toggleMenu()">
+ * Regula: #menu-btn aria-expanded + #mobile-menu visibilidade
+ */
 window.toggleMenu = function () {
     const btn = document.getElementById('menu-btn');
     const menu = document.getElementById('mobile-menu');
@@ -15,6 +26,16 @@ window.toggleMenu = function () {
 };
 
 // ── Clipboard com Fallback ───────────────────────────────────────────────────
+/**
+ * Copia texto para clipboard com suporte a navegadores antigos
+ * - Tenta Clipboard API moderna (Chrome, Edge, Safari, Firefox)
+ * - Fallback para execCommand('copy') em IE11 e navegadores legados
+ * - Feedback visual: cor muda por 1.5s
+ * 
+ * Uso: <button onclick="copyToClipboard(this, 'texto-a-copiar')">
+ * @param {HTMLElement} btn - elemento button para feedback visual
+ * @param {string} text - texto a copiar
+ */
 window.copyToClipboard = function (btn, text) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(() => {
@@ -26,6 +47,11 @@ window.copyToClipboard = function (btn, text) {
     }
 };
 
+/**
+ * Fallback para cópia em browsers sem Clipboard API
+ * Usa textarea temporário + execCommand
+ * @private
+ */
 function fallbackCopy(btn, text) {
     const textarea = document.createElement('textarea');
     textarea.value = text;
@@ -44,6 +70,13 @@ function fallbackCopy(btn, text) {
 }
 
 // ── Redirecionamento para WhatsApp (otimizado) ────────────────────────────────
+/**
+ * Valida e redireciona para WhatsApp sem hardcode
+ * Extrai link dinâmico de um elemento HTML existente
+ * Nunca exponha WhatsApp number em JS — sempre use config PHP
+ * 
+ * Uso: <a onclick="redirectToWhatsApp(event)">
+ */
 window.redirectToWhatsApp = function (event) {
     event?.preventDefault();
     // Extrai o WhatsApp link do primeiro elemento com href que contem wa.me
