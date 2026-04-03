@@ -2,19 +2,26 @@
 require_once __DIR__ . '/../config/site.php';
 require_once __DIR__ . '/../config/colors.php';
 
-$fotos_bg = [];
-for ($i = 1; $i <= 19; $i++) {
-    $fotos_bg[] = 'assets/images/galeria/foto' . str_pad($i, 2, '0', STR_PAD_LEFT) . '.webp';
-}
-$total      = count($fotos_bg);
-$duracao    = 5;
-$total_tempo = $total * $duracao;
-$pct_foto   = round(($duracao / $total_tempo) * 100);
-$pct_in     = max(1, round(($duracao * 0.3 / $total_tempo) * 100));
-$pct_fade   = $pct_foto + $pct_in;
-?>
+// Conta automaticamente as fotos disponíveis na galeria, sem hardcode
+$arquivos_bg = glob(__DIR__ . '/../assets/images/galeria/foto*.webp');
+sort($arquivos_bg);
+$fotos_bg = array_map(fn($f) => 'assets/images/galeria/' . basename($f), $arquivos_bg);
 
-<style>
+// Limita a 6 slides de fundo — suficiente para o efeito visual sem carregar todas as imagens
+$fotos_bg    = array_slice($fotos_bg, 0, 6);
+$total       = count($fotos_bg);
+$duracao     = 5;
+$total_tempo = $total * $duracao;
+$pct_foto    = round(($duracao / $total_tempo) * 100);
+$pct_in      = max(1, round(($duracao * 0.3 / $total_tempo) * 100));
+$pct_out     = $pct_foto + $pct_in; // renomeado de $pct_fade: representa o ponto em que opacity volta a 0
+
+$slides_css = '';
+foreach ($fotos_bg as $i => $foto) {
+    $slides_css .= ".bg-slide:nth-child(" . ($i + 1) . ") { background-image: url('{$foto}'); animation-delay: " . ($i * $duracao) . "s; }\n    ";
+}
+
+echo '<style>
     #endereco-section {
         position: relative;
         overflow: hidden;
@@ -29,51 +36,34 @@ $pct_fade   = $pct_foto + $pct_in;
         background-size: cover;
         background-position: center;
         opacity: 0;
-        animation: bgFade <?php echo $total_tempo; ?>s infinite;
+        animation: bgFade ' . $total_tempo . 's infinite;
     }
 
-    <?php foreach ($fotos_bg as $i => $foto): ?>.bg-slide:nth-child(<?php echo $i + 1; ?>) {
-        background-image: url('<?php echo $foto; ?>');
-        animation-delay: <?php echo $i * $duracao; ?>s;
-    }
-
-    <?php endforeach; ?>@keyframes bgFade {
-        0% {
-            opacity: 0;
-        }
-
-        <?php echo $pct_in; ?>% {
-            opacity: 1;
-        }
-
-        <?php echo $pct_foto; ?>% {
-            opacity: 1;
-        }
-
-        <?php echo $pct_fade; ?>% {
-            opacity: 0;
-        }
-
-        100% {
-            opacity: 0;
-        }
+    ' . $slides_css . '
+    @keyframes bgFade {
+        0%           { opacity: 0; }
+        ' . $pct_in  . '%  { opacity: 1; }
+        ' . $pct_foto . '%  { opacity: 1; }
+        ' . $pct_out . '%  { opacity: 0; }
+        100%         { opacity: 0; }
     }
 
     #endereco-overlay {
         position: absolute;
         inset: 0;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.60) 100%);
+        background: linear-gradient(to bottom, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0.60) 100%);
         z-index: 1;
     }
-</style>
+</style>';
+?>
 
 <div id="endereco-section" class="py-24">
 
     <?php foreach ($fotos_bg as $foto): ?>
-        <div class="bg-slide"></div>
+        <div class="bg-slide" aria-hidden="true"></div>
     <?php endforeach; ?>
 
-    <div id="endereco-overlay"></div>
+    <div id="endereco-overlay" aria-hidden="true"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
@@ -138,7 +128,7 @@ $pct_fade   = $pct_foto + $pct_in;
                         class="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full font-semibold text-sm text-white border-2 border-white/70 transition-all duration-300 hover:bg-white hover:text-azul-escuro hover:-translate-y-1">
                         💬 Falar pelo WhatsApp
                     </a>
-                    <a href="https://www.google.com/maps/dir/?api=1&destination=<?php echo $site['localizacao']['latitude']; ?>,<?php echo $site['localizacao']['longitude']; ?>"
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=<?php echo (float)$site['localizacao']['latitude']; ?>,<?php echo (float)$site['localizacao']['longitude']; ?>"
                         target="_blank" rel="noopener noreferrer"
                         aria-label="Abrir localização no Google Maps"
                         class="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full font-semibold text-sm text-white border-2 border-white/70 transition-all duration-300 hover:bg-white hover:text-azul-escuro hover:-translate-y-1">
@@ -157,8 +147,8 @@ $pct_fade   = $pct_foto + $pct_in;
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const lat = <?php echo $site['localizacao']['latitude']; ?>;
-        const lng = <?php echo $site['localizacao']['longitude']; ?>;
+        const lat = <?php echo (float)$site['localizacao']['latitude']; ?>;
+        const lng = <?php echo (float)$site['localizacao']['longitude']; ?>;
 
         const mapa = L.map('mapa-endereco').setView([lat, lng], 16);
 
@@ -169,20 +159,27 @@ $pct_fade   = $pct_foto + $pct_in;
 
         const marcador = L.marker([lat, lng]).addTo(mapa);
 
-        marcador.bindPopup(`
-                        <div style="font-size: 13px; line-height: 1.5; font-family: sans-serif;">
-                            <strong style="color: #1A2FA0; display: block; margin-bottom: 8px;"><?php echo htmlspecialchars($site['nome']); ?></strong>
-            <?php echo htmlspecialchars($site['localizacao']['endereco_completo']); ?><br>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}"
-               target="_blank" rel="noopener noreferrer"
-               style="color: #1A2FA0; text-decoration: underline; font-size: 12px; display: inline-block; margin-top: 6px;">
-               Abrir no Google Maps ↗
-            </a>
-        </div>
-    `).openPopup();
+        // json_encode garante escape correto para contexto JS, evitando quebras no template literal
+        const popupNome      = <?php echo json_encode($site['nome']); ?>;
+        const popupEndereco  = <?php echo json_encode($site['localizacao']['endereco_completo']); ?>;
 
+        marcador.bindPopup(`
+            <div style="font-size: 13px; line-height: 1.5; font-family: sans-serif;">
+                <strong style="color: #1A2FA0; display: block; margin-bottom: 8px;">${popupNome}</strong>
+                ${popupEndereco}<br>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}"
+                   target="_blank" rel="noopener noreferrer"
+                   style="color: #1A2FA0; text-decoration: underline; font-size: 12px; display: inline-block; margin-top: 6px;">
+                   Abrir no Google Maps ↗
+                </a>
+            </div>
+        `).openPopup();
+
+        // Debounce evita disparar invalidateSize dezenas de vezes por segundo durante resize
+        let resizeTimer;
         window.addEventListener('resize', function() {
-            mapa.invalidateSize();
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() { mapa.invalidateSize(); }, 100);
         });
     });
 </script>

@@ -1,6 +1,6 @@
 # RX DO PROJETO — Igreja da Vitória
 > **Status:** ✅ **100% AUDITADO & CORRIGIDO** — Acessibilidade, CSS, segurança, e UX otimizados. Pronto para deploy.
-> Última atualização: 02/04/2026 — Sessão final: 10 correções críticas e 9 validações (25 fixes total).
+> Última atualização: 02/04/2026 — Sessão de refatoração `endereco.php`: 7 fixes (performance, segurança, acessibilidade).
 
 ---
 
@@ -57,6 +57,20 @@
 | 8 | `main.js` | Função `toggleMenu()` não existia (header.php espera) | 🔴 Lógica | Criada função completa que toggle `.hidden` na #mobile-menu |
 | 9 | `main.js` | Função `copyToClipboard()` não existia (dizimos.php espera) | 🔴 Lógica | Criada com Clipboard API + fallback + feedback visual |
 | 10 | `oracoes-pedidos.php:245` | Input `oracao-mensagem` não tinha `<span id="erro-mensagem">` correspondente | 🔴 Validação | Adicionado `<span class="msg-erro" id="erro-mensagem">` |
+
+---
+
+### 🔧 Refatoração `endereco.php` (02/04/2026 — Sessão de Qualidade de Código) — 7 Fixes
+
+| # | Problema | Severidade | Solução |
+|---|---|---|---|
+| 1 | Contagem de fotos hardcoded `<= 19` — frágil se galeria mudar | 🔴 Manutenibilidade | `glob()` detecta automaticamente os arquivos `foto*.webp` |
+| 2 | 19 elementos DOM + 19 backgrounds carregando — excessivo para seção de endereço | 🟡 Performance | `array_slice(..., 0, 6)` — limita a 6 slides sem perder o efeito |
+| 3 | Lat/lng inseridos no JS sem cast explícito `(float)` | 🟡 Segurança | `(float)` aplicado em todas as ocorrências (JS + URL Google Maps) |
+| 4 | `$pct_fade` — nome enganoso, representa ponto de saída do opacity | 🟢 Legibilidade | Renomeado para `$pct_out` |
+| 5 | PHP dentro de template literal JS no popup Leaflet — risco de quebra | 🟡 Segurança | Valores extraídos via `json_encode()` para variáveis JS antes do template |
+| 6 | `<div class="bg-slide">` e `#endereco-overlay` decorativos sem `aria-hidden` | 🟡 Acessibilidade | `aria-hidden="true"` adicionado em todos os elementos decorativos |
+| 7 | `mapa.invalidateSize()` sem debounce — disparava dezenas de vezes/segundo no resize | 🟢 Performance | Debounce de 100ms com `clearTimeout` + `setTimeout` |
 
 ### Validação Completa pós-Auditoria
 
@@ -346,11 +360,14 @@ fadeUp    → opacity 0→1, translateY +20px→0 (0.8s, delay 0.2s)
 - Background `bege`, card centralizado — Pr. Daniel Sardinha Pires
 
 ### endereco.php — âncora `#endereco` via index.php
-- Background animado: 19 fotos da galeria em crossfade CSS (`animation: bgFade`)
-- Mapa Leaflet integrado (`id="mapa-endereco"`) — coords via `$site['localizacao']`
+- Background animado: **6 fotos** da galeria em crossfade CSS (`animation: bgFade`) — detectadas via `glob()`, sem hardcode
+- Mapa Leaflet integrado (`id="mapa-endereco"`) — coords via `$site['localizacao']` com cast `(float)`
 - 3 blocos de info (📍 endereço, 🕐 horários, 📞 telefone) — todos via `$site`
 - Link "Como Chegar" gerado dinamicamente via coords do config
-- **Melhoria:** Popup Leaflet com `font-family: sans-serif` consistente + spacing (margin/padding) adequado
+- Popup Leaflet: strings PHP passadas via `json_encode()` para variáveis JS (seguro contra quebra de template literal)
+- `bg-slide` e `#endereco-overlay` com `aria-hidden="true"` (elementos decorativos)
+- Resize do mapa com debounce 100ms
+- CSS gerado inteiramente via `echo` PHP — sem PHP interpolado em `<style>` (resolve falsos positivos VSCode)
 
 ### dizimos.php — `id="dizimos"`
 - Grid `lg:grid-cols-2`, background `creme`
