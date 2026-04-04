@@ -1,4 +1,5 @@
 <?php
+// Ponto de entrada principal do site
 require_once 'config/site.php';
 require_once 'config/colors.php';
 ?>
