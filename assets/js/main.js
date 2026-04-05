@@ -23,7 +23,27 @@ window.toggleMenu = function () {
     const isExpanded = btn.getAttribute('aria-expanded') === 'true';
     btn.setAttribute('aria-expanded', !isExpanded);
     btn.setAttribute('aria-label', isExpanded ? 'Abrir menu' : 'Fechar menu');
-    menu.classList.toggle('hidden');
+
+    if (isExpanded) {
+        // Fechar com animação
+        menu.style.opacity = '0';
+        menu.style.transform = 'translateY(-8px)';
+        setTimeout(() => {
+            menu.classList.add('hidden');
+            menu.style.opacity = '';
+            menu.style.transform = '';
+        }, 250);
+    } else {
+        // Abrir com animação
+        menu.classList.remove('hidden');
+        menu.style.opacity = '0';
+        menu.style.transform = 'translateY(-8px)';
+        requestAnimationFrame(() => {
+            menu.style.transition = 'opacity 250ms ease, transform 250ms ease';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+        });
+    }
 };
 
 // ── Touch feedback nos links mobile ──────────────────────────────────────────
