@@ -24,6 +24,18 @@ require_once __DIR__ . '/../config/colors.php';
     transition: none;
 }
 
+/* ── Menu Mobile — Animação de abertura ── */
+#mobile-menu {
+    transition: none;
+}
+#mobile-menu:not(.hidden) {
+    animation: menuAbrir 200ms ease forwards;
+}
+@keyframes menuAbrir {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
 /* ── Menu Mobile — Animação Hamburguer → X ── */
 .hamburguer-icon {
     display: flex;
