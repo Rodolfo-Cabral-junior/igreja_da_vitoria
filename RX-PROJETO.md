@@ -1,6 +1,6 @@
 # RX DO PROJETO — Igreja da Vitória
-> **Status:** ✅ **100% AUDITADO & CORRIGIDO** — Acessibilidade, CSS, segurança, e UX otimizados. Pronto para deploy.
-> Última atualização: 02/04/2026 — Sessão de refatoração `endereco.php`: 7 fixes (performance, segurança, acessibilidade).
+> **Status:** ✅ **100% AUDITADO & CORRIGIDO** — Acessibilidade, CSS, segurança, e UX otimizados. Em produção.
+> Última atualização: 04/04/2026 — Deploy em produção (HostGator) + Webhook GitHub configurado e funcionando.
 
 ---
 
@@ -11,7 +11,7 @@
 | **1 — Estrutura & Componentes** | ✅ Completo | 14 componentes funcionais |
 | **2 — Funcionalidades & JS** | ✅ Completo | CONFIG global, WhatsApp, Leaflet, carousel |
 | **3 — Testes & Validação** | ✅ Completo | PHP validado, JS limpo, IDs únicos |
-| **4 — Build & Deploy** | 🟢 Parcial | GitHub ✅ — falta hospedagem PHP |
+| **4 — Build & Deploy** | ✅ Completo | GitHub ✅ + HostGator ✅ + Webhook automático ✅ |
 | **5 — Otimizações SEO** | 🟡 Pendente | Recomendado pós-deploy |
 
 **Build:** ✅ Tailwind 39.76 KB | **JS:** ✅ main.js 166 linhas sem lixo | **PHP:** ✅ Sem erros de sintaxe
@@ -90,7 +90,30 @@
 
 ---
 
+## 🚀 Deploy & Infraestrutura (04/04/2026)
+
+| Item | Detalhe |
+|---|---|
+| **Hospedagem** | HostGator Plano M |
+| **Caminho no servidor** | `/home1/rodo7647/public_html/igrejadavitoria` |
+| **URL temporária** | `https://rodolfocabraljunior1775325069817.2362216.meusitehostgator.com.br/igrejadavitoria/` |
+| **Deploy automático** | Webhook GitHub → `deploy.php` → git pull |
+| **Secret do webhook** | `igrejadavitoria2026` |
+| **Status webhook** | ✅ ping + ✅ push confirmados (Recent Deliveries no GitHub) |
+
+> ⚠️ **IMPORTANTE:** O arquivo `deploy.php` na raiz do projeto **não deve ser removido** — é o endpoint que recebe os webhooks do GitHub e executa o `git pull` no servidor.
+
+---
+
 ## SESSÕES ANTERIORES
+
+### 04/04/2026 — Deploy & Infraestrutura completos
+- Deploy automático GitHub → HostGator via Webhook configurado e testado (ping ✅ + push ✅)
+- Domínio `cabralvestecnologia.com.br` comprado no Registro.br, DNS propagado mundialmente (IP 69.6.248.134)
+- Subdomínio `igrejadavitoria.cabralvestecnologia.com.br` criado
+- SSL gratuito em instalação automática pela HostGator (até 24h)
+- PHP 8.2 configurado localmente no Windows (`C:\php8.2`, adicionado ao PATH)
+- Correções no `header.php`: hamburguer→X animado, hover dourado, `-webkit-tap-highlight-color` removido, fechamento automático dos links mobile
 
 ### 02/04/2026 — Otimizações Visuais
 - Redesenho completo `visao.php` (layout + 3 cards Missão/Visão/Valores + 4 pilares)
@@ -115,7 +138,9 @@
 | **JS** | Vanilla JS ES6+ (sem framework) |
 | **Mapa** | Leaflet.js 1.9.4 (CDN — carregado em `head.php`) |
 | **Build** | `npm run build` → `assets/css/input.css` → `assets/css/style.css` |
-| **Servidor** | PHP built-in (`php -S localhost:8000`) ou Apache/Nginx |
+| **Servidor local** | PHP 8.2 (`C:\php8.2`) — `php -S localhost:8000` |
+| **Hospedagem** | HostGator Plano M — PHP + MySQL |
+| **Domínio** | `cabralvestecnologia.com.br` (Registro.br) |
 
 > ⚠️ **REGRA CRÍTICA:** Sempre rodar `npm run build` após adicionar novas classes Tailwind. O CSS é purgado — classes não detectadas nos arquivos de `content` não são compiladas.
 
@@ -393,6 +418,7 @@ fadeUp    → opacity 0→1, translateY +20px→0 (0.8s, delay 0.2s)
 - **Links WhatsApp:** sempre `https://wa.me/55XXXXXXXXXXX` (com DDI 55)
 - **Padrão de card:** `border-t-4`, `rounded-[20px]`, `shadow-sm`, `hover:shadow-lg`, `hover:-translate-y-1`
 - **Textos sensíveis:** nunca mencionar "Maria" como testemunho — usar "Jesus" ou genérico
+- **Validação mobile:** sempre testar no dispositivo real, não no DevTools — comportamento de touch difere
 
 ---
 
@@ -430,7 +456,7 @@ git commit -m "type(scope): description"
 
 ## ROADMAP (Futuro)
 
-- [ ] **Hospedagem:** Sagefy.com, Kinsta, ou Pottier (PHP + MySQL)
+- [x] **Hospedagem:** HostGator Plano M (PHP + MySQL) — em produção
 - [ ] **Form Orações:** Persistência em banco (form_submissions table)
 - [ ] **Form Contato:** Página separada com captcha (hCaptcha)
 - [ ] **Admin Panel:** Dashboard simples (CRUD notícias, banners)
@@ -463,9 +489,19 @@ git commit -m "type(scope): description"
 - [x] Inline styles eliminados (banner-rotativo, galeria, endereco)
 - [x] `aria-label` + `aria-expanded` + `aria-controls` no menu mobile
 - [x] GitHub: `github.com/Rodolfo-Cabral-junior/igreja_da_vitoria`
+- [x] Deploy em produção (HostGator — Plano M)
+- [x] Deploy automático via Webhook GitHub (git push → site atualiza)
+- [x] Domínio cabralvestecnologia.com.br configurado
+- [x] Subdomínio igrejadavitoria.cabralvestecnologia.com.br
+- [x] PHP 8.2 local configurado no Windows
+- [x] Hamburguer vira X animado no menu mobile
+- [x] Hover dourado funcionando desktop e mobile
+- [x] Tap highlight removido no mobile
+- [x] Links mobile fecham menu ao clicar
 
 ### Próximos — Curto Prazo
-- [ ] Deploy em hospedagem PHP (Hostinger, Umbler, ou servidor dedicado)
+- [ ] SSL HTTPS ativo (aguardando instalação automática HostGator)
+- [ ] Trocar domínio principal no painel HostGator
 - [ ] Open Graph meta tags completas (`og:image` com URL absoluta, `og:url` fixo)
 - [ ] `sitemap.xml` + `robots.txt`
 - [ ] Google Analytics + tracking de eventos (CTAs, formulário de oração)
