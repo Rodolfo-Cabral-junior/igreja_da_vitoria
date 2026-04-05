@@ -107,6 +107,13 @@
 
 ## SESSÕES ANTERIORES
 
+### 04/04/2026 — Favicon, Menu Mobile e UX Touch
+- Favicon gerado em 5 tamanhos a partir de `logotopo.png` via Python/Pillow (`favicon.ico`, `16x16`, `32x32`, `apple-touch-icon 180x180`, `192x192`)
+- `head.php` atualizado com todas as tags de favicon (sem `/` inicial — consistente com o projeto)
+- `toggleMenu` simplificado: animação de abertura via `@keyframes menuAbrir` no CSS (sem `requestAnimationFrame` no JS)
+- Fix: estado `:focus` preso nos links mobile após clique — reset via `background-color: transparent !important`
+- Fix: `onclick="toggleMenu()"` removido de todos os links do menu mobile — fechamento agora via `addEventListener('click')` com `setTimeout(10ms)`, evitando conflito com navegação por âncora
+
 ### 04/04/2026 — Deploy & Infraestrutura completos
 - Deploy automático GitHub → HostGator via Webhook configurado e testado (ping ✅ + push ✅)
 - Domínio `cabralvestecnologia.com.br` comprado no Registro.br, DNS propagado mundialmente (IP 69.6.248.134)
@@ -315,12 +322,14 @@ fadeUp    → opacity 0→1, translateY +20px→0 (0.8s, delay 0.2s)
 |---|---|---|---|
 | 0 | **CONFIG** | — | `CAROUSEL_INTERVAL` — fonte única de verdade |
 | 1 | **toggleMenu()** | `#menu-btn`, `#mobile-menu` | Toggle `.hidden` + atualiza `aria-expanded` (acessibilidade) |
-| 2 | **copyToClipboard()** | `onclick="copyToClipboard(...)"` | Clipboard API + fallback `execCommand('copy')` + feedback visual |
-| 3 | **redirectToWhatsApp()** | `onclick="redirectToWhatsApp(event)"` | Extrai `href` de primeiro link `wa.me` disponível |
-| 4 | **Hero Slideshow** | `.hero-slide`, `.hero-dot` | Auto-avanço via `CONFIG.CAROUSEL_INTERVAL`, click nos dots, reset interval |
-| 5 | **Banner Carousel** | `.carousel-slide`, `[data-carousel-dot]`, `[data-carousel-prev/next]` | Auto-avanço, setas, dots, classe `.ativo` |
-| 6 | **IntersectionObserver** | `.animar-entrada` | Threshold 0.15, adiciona `.visivel`, unobserve |
-| 7 | **Form Orações** | `#form-pedido-oracao` | Validação + envio `wa.me` + sucesso + reset |
+| 2 | **Fecha menu (links)** | `#mobile-menu a[href^="#"]` | `addEventListener('click')` + `setTimeout(10ms)` — sem conflito com âncora |
+| 3 | **Touch feedback** | `.nav-link` | `touchstart` → `.tocado` / `touchend` → remove após 300ms |
+| 4 | **copyToClipboard()** | `onclick="copyToClipboard(...)"` | Clipboard API + fallback `execCommand('copy')` + feedback visual |
+| 5 | **redirectToWhatsApp()** | `onclick="redirectToWhatsApp(event)"` | Extrai `href` de primeiro link `wa.me` disponível |
+| 6 | **Hero Slideshow** | `.hero-slide`, `.hero-dot` | Auto-avanço via `CONFIG.CAROUSEL_INTERVAL`, click nos dots, reset interval |
+| 7 | **Banner Carousel** | `.carousel-slide`, `[data-carousel-dot]`, `[data-carousel-prev/next]` | Auto-avanço, setas, dots, classe `.ativo` |
+| 8 | **IntersectionObserver** | `.animar-entrada` | Threshold 0.15, adiciona `.visivel`, unobserve |
+| 9 | **Form Orações** | `#form-pedido-oracao` | Validação + envio `wa.me` + sucesso + reset |
 
 ```php
 // Cache-busting no carregamento
@@ -498,6 +507,10 @@ git commit -m "type(scope): description"
 - [x] Hover dourado funcionando desktop e mobile
 - [x] Tap highlight removido no mobile
 - [x] Links mobile fecham menu ao clicar
+- [x] Favicon completo (ico + png 16/32/180/192) gerado de `logotopo.png`
+- [x] Animação de abertura do menu mobile via CSS `@keyframes menuAbrir`
+- [x] Estado `:focus` preso nos links mobile corrigido
+- [x] `onclick` inline removido dos links mobile — fechamento via `addEventListener`
 
 ### Próximos — Curto Prazo
 - [ ] SSL HTTPS ativo (aguardando instalação automática HostGator)
