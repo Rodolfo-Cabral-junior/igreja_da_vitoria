@@ -16,6 +16,11 @@ require_once __DIR__ . '/../config/colors.php';
     background-color: rgba(212, 168, 68, 0.1) !important;
     border-radius: 8px;
 }
+.nav-link:focus {
+    outline: none;
+    background-color: transparent !important;
+    color: #e5e7eb !important;
+}
 .nav-link:active,
 .nav-link.tocado {
     color: #D4A844 !important;
