@@ -132,15 +132,15 @@ require_once __DIR__ . '/../config/colors.php';
         <!-- Menu Mobile -->
         <div id="mobile-menu" class="hidden md:hidden py-4 border-t border-dourado/20 bg-gradient-to-b from-[#1a1814] to-[#111009]">
             <div class="flex flex-col gap-1">
-                <a href="#inicio" onclick="toggleMenu()" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Início</a>
-                <a href="#cultos" onclick="toggleMenu()" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Cultos</a>
-                <a href="#nossa-visao" onclick="toggleMenu()" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Visão</a>
-                <a href="#oracoes" onclick="toggleMenu()" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Orações</a>
-                <a href="#ministerios" onclick="toggleMenu()" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Ministérios</a>
-                <a href="#endereco" onclick="toggleMenu()" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Localização</a>
+                <a href="#inicio" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Início</a>
+                <a href="#cultos" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Cultos</a>
+                <a href="#nossa-visao" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Visão</a>
+                <a href="#oracoes" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Orações</a>
+                <a href="#ministerios" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Ministérios</a>
+                <a href="#endereco" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Localização</a>
                 <div class="flex gap-2 mt-3 px-2">
                     <a href="#" onclick="redirectToWhatsApp(event)" class="flex-1 px-3 py-2.5 rounded-full bg-gradient-to-r from-vermelho to-vermelho-escuro text-white font-medium text-sm text-center transition-all hover:shadow-lg cursor-pointer">Contato</a>
-                    <a href="#dizimos" onclick="toggleMenu()" class="flex-1 px-3 py-2.5 rounded-full bg-gradient-to-r from-vermelho to-vermelho-escuro text-white font-medium text-sm text-center transition-all hover:shadow-lg">Oferta</a>
+                    <a href="#dizimos" class="flex-1 px-3 py-2.5 rounded-full bg-gradient-to-r from-vermelho to-vermelho-escuro text-white font-medium text-sm text-center transition-all hover:shadow-lg">Oferta</a>
                 </div>
             </div>
         </div>

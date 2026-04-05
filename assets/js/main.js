@@ -26,6 +26,23 @@ window.toggleMenu = function () {
     menu.classList.toggle('hidden');
 };
 
+// ── Fecha menu mobile ao clicar em link ──────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function () {
+    const menuLinks = document.querySelectorAll('#mobile-menu a[href^="#"]');
+    menuLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+            setTimeout(function () {
+                const btn = document.getElementById('menu-btn');
+                const menu = document.getElementById('mobile-menu');
+                if (!btn || !menu) return;
+                if (btn.getAttribute('aria-expanded') === 'true') {
+                    toggleMenu();
+                }
+            }, 10);
+        });
+    });
+});
+
 // ── Touch feedback nos links mobile ──────────────────────────────────────────
 document.querySelectorAll('.nav-link').forEach(function(link) {
     link.addEventListener('touchstart', function() {
