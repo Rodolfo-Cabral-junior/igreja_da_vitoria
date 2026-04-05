@@ -2,6 +2,56 @@
 require_once __DIR__ . '/../config/site.php';
 require_once __DIR__ . '/../config/colors.php';
 ?>
+<style>
+/* ── Nav link — transição e hover/active explícitos ── */
+.nav-link {
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    display: block;
+    transition: color 300ms ease, background-color 300ms ease;
+}
+.nav-link:hover,
+.nav-link:focus-visible {
+    color: #D4A844 !important;
+    background-color: rgba(212, 168, 68, 0.1) !important;
+    border-radius: 8px;
+}
+.nav-link:active,
+.nav-link.tocado {
+    color: #D4A844 !important;
+    background-color: rgba(212, 168, 68, 0.15) !important;
+    border-radius: 8px;
+    transition: none;
+}
+
+/* ── Menu Mobile — Animação Hamburguer → X ── */
+.hamburguer-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+}
+.menu-linha {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: currentColor;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+}
+#menu-btn[aria-expanded="true"] .menu-linha-1 {
+    transform: translateY(8px) rotate(45deg);
+}
+#menu-btn[aria-expanded="true"] .menu-linha-2 {
+    opacity: 0;
+    transform: scaleX(0);
+}
+#menu-btn[aria-expanded="true"] .menu-linha-3 {
+    transform: translateY(-8px) rotate(-45deg);
+}
+</style>
 
 <header id="header" class="fixed top-0 w-full bg-gradient-to-r from-[#111009] to-[#1a1814] shadow-sm border-b border-dourado/20 z-50 transition-all duration-300 scrolled:shadow-lg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -26,33 +76,15 @@ require_once __DIR__ . '/../config/colors.php';
 
             <!-- Nav Desktop -->
             <nav class="hidden md:flex items-center gap-1">
-                <a href="#inicio" class="nav-link px-3 py-2 text-sm font-medium text-gray-200 transition-all duration-300 rounded-lg hover:text-dourado hover:bg-dourado/10 relative group">
-                    Início
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-dourado to-dourado-claro scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full"></span>
-                </a>
-                <a href="#cultos" class="nav-link px-3 py-2 text-sm font-medium text-gray-200 transition-all duration-300 rounded-lg hover:text-dourado hover:bg-dourado/10 relative group">
-                    Cultos
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-dourado to-dourado-claro scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full"></span>
-                </a>
-                <a href="#nossa-visao" class="nav-link px-3 py-2 text-sm font-medium text-gray-200 transition-all duration-300 rounded-lg hover:text-dourado hover:bg-dourado/10 relative group">
-                    Visão
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-dourado to-dourado-claro scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full"></span>
-                </a>
-                <a href="#oracoes" class="nav-link px-3 py-2 text-sm font-medium text-gray-200 transition-all duration-300 rounded-lg hover:text-dourado hover:bg-dourado/10 relative group">
-                    Orações
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-dourado to-dourado-claro scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full"></span>
-                </a>
-                <a href="#ministerios" class="nav-link px-3 py-2 text-sm font-medium text-gray-200 transition-all duration-300 rounded-lg hover:text-dourado hover:bg-dourado/10 relative group">
-                    Ministérios
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-dourado to-dourado-claro scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full"></span>
-                </a>
-                <a href="#" onclick="redirectToWhatsApp(event)" class="nav-link px-3 py-2 text-sm font-medium text-gray-200 transition-all duration-300 rounded-lg hover:text-dourado hover:bg-dourado/10 relative group cursor-pointer">
-                    Contato
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-dourado to-dourado-claro scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full"></span>
-                </a>
+                <a href="#inicio" class="nav-link px-3 py-2 text-sm font-medium text-gray-200 rounded-lg">Início</a>
+                <a href="#cultos" class="nav-link px-3 py-2 text-sm font-medium text-gray-200 rounded-lg">Cultos</a>
+                <a href="#nossa-visao" class="nav-link px-3 py-2 text-sm font-medium text-gray-200 rounded-lg">Visão</a>
+                <a href="#oracoes" class="nav-link px-3 py-2 text-sm font-medium text-gray-200 rounded-lg">Orações</a>
+                <a href="#ministerios" class="nav-link px-3 py-2 text-sm font-medium text-gray-200 rounded-lg">Ministérios</a>
+                <a href="#" onclick="redirectToWhatsApp(event)" class="nav-link px-3 py-2 text-sm font-medium text-gray-200 rounded-lg cursor-pointer">Contato</a>
             </nav>
 
-            <!-- Botão Contato + Oferta + Menu Mobile Toggle -->
+            <!-- Botões + Menu Toggle -->
             <div class="flex items-center gap-3">
                 <a href="#" onclick="redirectToWhatsApp(event)" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-vermelho to-vermelho-escuro text-white font-medium text-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 group cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 group-hover:scale-110 transition-transform">
@@ -71,27 +103,30 @@ require_once __DIR__ . '/../config/colors.php';
                 </a>
 
                 <button id="menu-btn" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 rounded-lg text-white hover:bg-dourado/20 transition-all" onclick="toggleMenu()">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
+                    <span class="hamburguer-icon" aria-hidden="true">
+                        <span class="menu-linha menu-linha-1"></span>
+                        <span class="menu-linha menu-linha-2"></span>
+                        <span class="menu-linha menu-linha-3"></span>
+                    </span>
                 </button>
             </div>
         </div>
 
-        <!-- Menu Mobile (oculto por padrão) -->
+        <!-- Menu Mobile -->
         <div id="mobile-menu" class="hidden md:hidden py-4 border-t border-dourado/20 bg-gradient-to-b from-[#1a1814] to-[#111009]">
             <div class="flex flex-col gap-1">
-                <a href="#inicio" class="px-4 py-2.5 rounded-lg text-sm font-medium text-gray-200 transition-all hover:text-dourado hover:bg-dourado/10">Início</a>
-                <a href="#cultos" class="px-4 py-2.5 rounded-lg text-sm font-medium text-gray-200 transition-all hover:text-dourado hover:bg-dourado/10">Cultos</a>
-                <a href="#nossa-visao" class="px-4 py-2.5 rounded-lg text-sm font-medium text-gray-200 transition-all hover:text-dourado hover:bg-dourado/10">Visão</a>
-                <a href="#oracoes" class="px-4 py-2.5 rounded-lg text-sm font-medium text-gray-200 transition-all hover:text-dourado hover:bg-dourado/10">Orações</a>
-                <a href="#ministerios" class="px-4 py-2.5 rounded-lg text-sm font-medium text-gray-200 transition-all hover:text-dourado hover:bg-dourado/10">Ministérios</a>
-                <a href="#endereco" class="px-4 py-2.5 rounded-lg text-sm font-medium text-gray-200 transition-all hover:text-dourado hover:bg-dourado/10">Localização</a>
+                <a href="#inicio" onclick="toggleMenu()" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Início</a>
+                <a href="#cultos" onclick="toggleMenu()" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Cultos</a>
+                <a href="#nossa-visao" onclick="toggleMenu()" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Visão</a>
+                <a href="#oracoes" onclick="toggleMenu()" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Orações</a>
+                <a href="#ministerios" onclick="toggleMenu()" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Ministérios</a>
+                <a href="#endereco" onclick="toggleMenu()" class="nav-link px-3 py-3 text-sm font-medium text-gray-200 rounded-lg">Localização</a>
                 <div class="flex gap-2 mt-3 px-2">
-                    <a href="#" onclick="redirectToWhatsApp(event)" class="flex-1 px-3 py-2.5 rounded-full bg-gradient-to-r from-vermelho to-vermelho-escuro text-white font-medium text-xs text-center transition-all hover:shadow-lg cursor-pointer">Contato</a>
-                    <a href="#dizimos" class="flex-1 px-3 py-2.5 rounded-full bg-gradient-to-r from-vermelho to-vermelho-escuro text-white font-medium text-xs text-center transition-all hover:shadow-lg">Oferta</a>
+                    <a href="#" onclick="redirectToWhatsApp(event)" class="flex-1 px-3 py-2.5 rounded-full bg-gradient-to-r from-vermelho to-vermelho-escuro text-white font-medium text-sm text-center transition-all hover:shadow-lg cursor-pointer">Contato</a>
+                    <a href="#dizimos" onclick="toggleMenu()" class="flex-1 px-3 py-2.5 rounded-full bg-gradient-to-r from-vermelho to-vermelho-escuro text-white font-medium text-sm text-center transition-all hover:shadow-lg">Oferta</a>
                 </div>
             </div>
         </div>
+
     </div>
 </header>

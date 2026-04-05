@@ -22,8 +22,19 @@ window.toggleMenu = function () {
 
     const isExpanded = btn.getAttribute('aria-expanded') === 'true';
     btn.setAttribute('aria-expanded', !isExpanded);
+    btn.setAttribute('aria-label', isExpanded ? 'Abrir menu' : 'Fechar menu');
     menu.classList.toggle('hidden');
 };
+
+// ── Touch feedback nos links mobile ──────────────────────────────────────────
+document.querySelectorAll('.nav-link').forEach(function(link) {
+    link.addEventListener('touchstart', function() {
+        this.classList.add('tocado');
+    }, { passive: true });
+    link.addEventListener('touchend', function() {
+        setTimeout(() => this.classList.remove('tocado'), 300);
+    }, { passive: true });
+});
 
 // ── Clipboard com Fallback ───────────────────────────────────────────────────
 /**
