@@ -24,8 +24,11 @@ require_once __DIR__ . '/../config/colors.php';
     <title><?php echo htmlspecialchars($site['nome']); ?> — <?php echo htmlspecialchars($site['localizacao']['cidade']); ?></title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/assets/images/logo/favicon.ico">
-    <link rel="apple-touch-icon" href="/assets/images/logo/logo.png">
+    <link rel="icon" type="image/x-icon" href="assets/images/logo/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/logo/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/logo/favicon-192x192.png">
 
     <!-- Google Fonts: Cinzel + Raleway -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
