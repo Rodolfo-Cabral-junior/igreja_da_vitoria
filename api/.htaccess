@@ -1,0 +1,17 @@
+# Desabilita listagem de diretório
+Options -Indexes
+
+# Nega acesso direto a todos os arquivos por padrão
+<FilesMatch ".*">
+    Require all denied
+</FilesMatch>
+
+# Permite apenas oracoes.php
+<Files "oracoes.php">
+    Require all granted
+</Files>
+
+# Header de segurança
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+</IfModule>

@@ -234,15 +234,22 @@ $grupos = [
                                     class="w-full px-4 py-3 border border-black/[0.12] rounded-xl text-corpo text-[14px]
                                               focus:outline-none focus:border-dourado focus:ring-2 focus:ring-dourado/10
                                               transition-all bg-white">
+                                <span class="msg-erro" id="erro-telefone">Formato inválido. Ex: (62) 99999-9999</span>
                             </div>
                         </div>
                         <div class="mb-5">
-                            <label class="block text-[13px] font-semibold text-titulo mb-2" for="oracao-assunto">Assunto <span class="text-vermelho">*</span></label>
-                            <input id="oracao-assunto" type="text" placeholder="Ex: Pedido de cura, orientação, provisão..."
+                            <label class="block text-[13px] font-semibold text-titulo mb-2" for="oracao-grupo">Grupo de Oração <span class="text-vermelho">*</span></label>
+                            <select id="oracao-grupo"
                                 class="w-full px-4 py-3 border border-black/[0.12] rounded-xl text-corpo text-[14px]
                                           focus:outline-none focus:border-dourado focus:ring-2 focus:ring-dourado/10
                                           transition-all bg-white" required>
-                            <span class="msg-erro" id="erro-assunto">Informe o assunto do pedido.</span>
+                                <option value="">Selecione um grupo...</option>
+                                <option value="Intercessao">Intercessão</option>
+                                <option value="Cura">Cura</option>
+                                <option value="Familia">Família</option>
+                                <option value="Outros">Outros</option>
+                            </select>
+                            <span class="msg-erro" id="erro-grupo">Selecione um grupo de oração.</span>
                         </div>
                         <div class="mb-5">
                             <label class="block text-[13px] font-semibold text-titulo mb-2" for="oracao-mensagem">Descreva seu Pedido <span class="text-vermelho">*</span></label>
@@ -286,4 +293,3 @@ $grupos = [
 
     </div>
 </section>
-

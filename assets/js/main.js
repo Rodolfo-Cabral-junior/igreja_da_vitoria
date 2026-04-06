@@ -44,11 +44,11 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // ── Touch feedback nos links mobile ──────────────────────────────────────────
-document.querySelectorAll('.nav-link').forEach(function(link) {
-    link.addEventListener('touchstart', function() {
+document.querySelectorAll('.nav-link').forEach(function (link) {
+    link.addEventListener('touchstart', function () {
         this.classList.add('tocado');
     }, { passive: true });
-    link.addEventListener('touchend', function() {
+    link.addEventListener('touchend', function () {
         setTimeout(() => this.classList.remove('tocado'), 300);
     }, { passive: true });
 });
@@ -213,60 +213,118 @@ window.redirectToWhatsApp = function (event) {
 
     const campos = {
         nome: { el: document.getElementById('oracao-nome'), erro: document.getElementById('erro-nome') },
-        assunto: { el: document.getElementById('oracao-assunto'), erro: document.getElementById('erro-assunto') },
+        grupo: { el: document.getElementById('oracao-grupo'), erro: document.getElementById('erro-grupo') },
         mensagem: { el: document.getElementById('oracao-mensagem'), erro: document.getElementById('erro-mensagem') },
     };
+    const campoTelefone = document.getElementById('oracao-telefone');
+    const erroTelefone = document.getElementById('erro-telefone');
     const sucesso = document.getElementById('oracao-sucesso');
     const btnLimpar = document.getElementById('btn-limpar-oracao');
-
-    function validar() {
-        let ok = true;
-        Object.values(campos).forEach(({ el, erro }) => {
-            const vazio = !el.value.trim();
-            el.classList.toggle('campo-erro', vazio);
-            erro.classList.toggle('visivel', vazio);
-            if (vazio) ok = false;
-        });
-        return ok;
-    }
 
     function limparErros() {
         Object.values(campos).forEach(({ el, erro }) => {
             el.classList.remove('campo-erro');
             erro.classList.remove('visivel');
         });
+        if (campoTelefone) campoTelefone.classList.remove('campo-erro');
+        if (erroTelefone) erroTelefone.classList.remove('visivel');
         sucesso.classList.add('hidden');
         sucesso.classList.remove('flex');
+    }
+
+    function exibirErrosApi(errors) {
+        const map = { nome: campos.nome, grupo: campos.grupo, mensagem: campos.mensagem };
+        Object.keys(map).forEach(function (key) {
+            if (errors[key]) {
+                map[key].el.classList.add('campo-erro');
+                map[key].erro.textContent = errors[key];
+                map[key].erro.classList.add('visivel');
+            }
+        });
+        if (errors.telefone && campoTelefone && erroTelefone) {
+            campoTelefone.classList.add('campo-erro');
+            erroTelefone.textContent = errors.telefone;
+            erroTelefone.classList.add('visivel');
+        }
+        if (errors.geral && campos.nome.erro) {
+            campos.nome.erro.textContent = errors.geral;
+            campos.nome.erro.classList.add('visivel');
+        }
     }
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         limparErros();
-        if (!validar()) return;
 
-        const tel = document.getElementById('oracao-telefone')?.value.trim() ?? '';
-        // Extrai o número do primeiro link wa.me existente na página — sem hardcode
-        const numero = document.querySelector('a[href*="wa.me"]')?.getAttribute('href')?.match(/wa\.me\/(\d+)/)?.[1] ?? '';
+        const btn = form.querySelector('[type="submit"]');
+        const btnOriginal = btn.innerHTML;
+        btn.disabled = true;
+        btn.textContent = 'Enviando...';
+
+        const tel = campoTelefone?.value.trim() ?? '';
         const nome = campos.nome.el.value.trim();
-        const assunto = campos.assunto.el.value.trim();
-        const mensagem = campos.mensagem.el.value.trim();
+        const grupo = campos.grupo.el.value.trim();
+        const msg = campos.mensagem.el.value.trim();
 
-        const texto = encodeURIComponent(
-            `*Pedido de Oração*\n` +
-            `Nome: ${nome}\n` +
-            (tel ? `WhatsApp: ${tel}\n` : '') +
-            `Assunto: ${assunto}\n\n` +
-            mensagem
-        );
+        const payload = new FormData();
+        payload.append('nome', nome);
+        payload.append('telefone', tel);
+        payload.append('mensagem', msg);
+        payload.append('grupo', grupo);
 
-        window.open(`https://wa.me/${numero}?text=${texto}`, '_blank', 'noopener,noreferrer');
-
-        sucesso.classList.remove('hidden');
-        sucesso.classList.add('flex');
-        form.reset();
+        fetch('/api/oracoes.php', { method: 'POST', body: payload })
+            .then(function (res) { return res.json(); })
+            .then(function (data) {
+                if (data.success) {
+                    // Extrai o número do primeiro link wa.me existente na página — sem hardcode
+                    const numero = document.querySelector('a[href*="wa.me"]')
+                        ?.getAttribute('href')?.match(/wa\.me\/(\d+)/)?.[1] ?? '';
+                    const texto = encodeURIComponent(
+                        `*Pedido de Oração*\n` +
+                        `Nome: ${nome}\n` +
+                        (tel ? `WhatsApp: ${tel}\n` : '') +
+                        `Grupo: ${grupo}\n\n` +
+                        msg
+                    );
+                    window.open(`https://wa.me/${numero}?text=${texto}`, '_blank', 'noopener,noreferrer');
+                    sucesso.classList.remove('hidden');
+                    sucesso.classList.add('flex');
+                    form.reset();
+                } else {
+                    exibirErrosApi(data.errors || {});
+                }
+            })
+            .catch(function () {
+                if (campos.nome.erro) {
+                    campos.nome.erro.textContent = 'Erro de conexão. Tente novamente.';
+                    campos.nome.erro.classList.add('visivel');
+                }
+            })
+            .finally(function () {
+                btn.disabled = false;
+                btn.innerHTML = btnOriginal;
+            });
     });
 
     if (btnLimpar) {
-        btnLimpar.addEventListener('click', () => { limparErros(); });
+        btnLimpar.addEventListener('click', function () { limparErros(); });
+    }
+
+    // ── Máscara automática WhatsApp: (XX) XXXXX-XXXX ou (XX) XXXX-XXXX ───────
+    if (campoTelefone) {
+        campoTelefone.addEventListener('input', function () {
+            const digits = this.value.replace(/\D/g, '').slice(0, 11);
+            let masked = '';
+            if (digits.length <= 2) {
+                masked = digits.length ? `(${digits}` : '';
+            } else if (digits.length <= 6) {
+                masked = `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+            } else if (digits.length <= 10) {
+                masked = `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+            } else {
+                masked = `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+            }
+            this.value = masked;
+        });
     }
 })();
