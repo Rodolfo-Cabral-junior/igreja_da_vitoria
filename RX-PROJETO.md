@@ -1,6 +1,6 @@
 # RX DO PROJETO — Igreja da Vitória
-> **Status:** ✅ **100% AUDITADO & CORRIGIDO** — Acessibilidade, CSS, segurança, e UX otimizados. Em produção.
-> Última atualização: 04/04/2026 — Deploy em produção (HostGator) + Webhook GitHub configurado e funcionando.
+> **Status:** ✅ **100% AUDITADO & CORRIGIDO** — SEO fase 5 implementado. Em produção.
+> Última atualização: 06/04/2026 — Open Graph, sitemap.xml, robots.txt e Schema.org adicionados.
 
 ---
 
@@ -12,7 +12,7 @@
 | **2 — Funcionalidades & JS** | ✅ Completo | CONFIG global, WhatsApp, Leaflet, carousel |
 | **3 — Testes & Validação** | ✅ Completo | PHP validado, JS limpo, IDs únicos |
 | **4 — Build & Deploy** | ✅ Completo | GitHub ✅ + HostGator ✅ + Webhook automático ✅ |
-| **5 — Otimizações SEO** | 🟡 Pendente | Recomendado pós-deploy |
+| **5 — Otimizações SEO** | ✅ Completo | Open Graph, sitemap.xml, robots.txt, Schema.org |
 
 **Build:** ✅ Tailwind 39.76 KB | **JS:** ✅ main.js 166 linhas sem lixo | **PHP:** ✅ Sem erros de sintaxe
 **GitHub:** `github.com/Rodolfo-Cabral-junior/igreja_da_vitoria` — branch `main`
@@ -106,6 +106,12 @@
 ---
 
 ## SESSÕES ANTERIORES
+
+### 06/04/2026 — SEO Fase 5
+- `head.php`: Open Graph completo (`og:title`, `og:description`, `og:image` URL absoluta, `og:url`, `og:type`, `og:locale`), Twitter Card, Schema.org tipo Church com dados dinâmicos de `$site`
+- `config/site.php`: campo `seo` adicionado (`title`, `description`, `url`, `og_image`), campo `analytics.ga4_id` preparado (desativado até ter ID real)
+- `sitemap.xml`: criado na raiz com todas as âncoras do site
+- `robots.txt`: criado na raiz — bloqueia `deploy.php` e `config/`, aponta sitemap
 
 ### 04/04/2026 — Favicon, Menu Mobile e UX Touch
 - Favicon gerado em 5 tamanhos a partir de `logotopo.png` via Python/Pillow (`favicon.ico`, `16x16`, `32x32`, `apple-touch-icon 180x180`, `192x192`)
@@ -511,13 +517,13 @@ git commit -m "type(scope): description"
 - [x] Animação de abertura do menu mobile via CSS `@keyframes menuAbrir`
 - [x] Estado `:focus` preso nos links mobile corrigido
 - [x] `onclick` inline removido dos links mobile — fechamento via `addEventListener`
+- [x] Open Graph meta tags completas (`og:image` com URL absoluta, `og:url` fixo)
+- [x] `sitemap.xml` + `robots.txt`
 
 ### Próximos — Curto Prazo
 - [ ] SSL HTTPS ativo (aguardando instalação automática HostGator)
 - [ ] Trocar domínio principal no painel HostGator
-- [ ] Open Graph meta tags completas (`og:image` com URL absoluta, `og:url` fixo)
-- [ ] `sitemap.xml` + `robots.txt`
-- [ ] Google Analytics + tracking de eventos (CTAs, formulário de oração)
+- [ ] Google Analytics 4 — preencher `$site['analytics']['ga4_id']` + tracking de eventos (CTAs, formulário de oração)
 - [ ] Validação server-side no formulário de oração (PHP)
 
 ### Futuros — Longo Prazo
