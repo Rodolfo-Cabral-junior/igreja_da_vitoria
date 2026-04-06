@@ -1,6 +1,6 @@
 # RX DO PROJETO — Igreja da Vitória
-> **Status:** ✅ **100% AUDITADO & CORRIGIDO** — SEO fase 5 implementado. Em produção.
-> Última atualização: 06/04/2026 — Open Graph, sitemap.xml, robots.txt e Schema.org adicionados.
+> **Status:** ✅ **100% AUDITADO & CORRIGIDO** — Validação server-side e rate limiting implementados. Em produção.
+> Última atualização: 06/04/2026 — Validação PHP, rate limiting e máscara WhatsApp adicionados ao formulário de oração.
 
 ---
 
@@ -13,6 +13,7 @@
 | **3 — Testes & Validação** | ✅ Completo | PHP validado, JS limpo, IDs únicos |
 | **4 — Build & Deploy** | ✅ Completo | GitHub ✅ + HostGator ✅ + Webhook automático ✅ |
 | **5 — Otimizações SEO** | ✅ Completo | Open Graph, sitemap.xml, robots.txt, Schema.org |
+| **6 — Validação Server-Side** | ✅ Completo | Formulário de oração com validação PHP, rate limiting e máscara WhatsApp |
 
 **Build:** ✅ Tailwind 39.76 KB | **JS:** ✅ main.js 166 linhas sem lixo | **PHP:** ✅ Sem erros de sintaxe
 **GitHub:** `github.com/Rodolfo-Cabral-junior/igreja_da_vitoria` — branch `main`
@@ -106,6 +107,12 @@
 ---
 
 ## SESSÕES ANTERIORES
+
+### 06/04/2026 — Fase 6: Validação Server-Side
+- `api/oracoes.php`: endpoint POST com validação, sanitização e rate limit (3 envios/hora por IP)
+- `api/.htaccess`: bloqueia acesso direto à pasta
+- `components/oracoes-pedidos.php`: campo assunto substituído por select `#oracao-grupo`; spans `#erro-telefone` e `#erro-grupo` adicionados
+- `assets/js/main.js`: fetch para API, estados de loading, exibição de erros nos spans, máscara `(XX) XXXXX-XXXX`
 
 ### 06/04/2026 — SEO Fase 5
 - `head.php`: Open Graph completo (`og:title`, `og:description`, `og:image` URL absoluta, `og:url`, `og:type`, `og:locale`), Twitter Card, Schema.org tipo Church com dados dinâmicos de `$site`
@@ -519,12 +526,12 @@ git commit -m "type(scope): description"
 - [x] `onclick` inline removido dos links mobile — fechamento via `addEventListener`
 - [x] Open Graph meta tags completas (`og:image` com URL absoluta, `og:url` fixo)
 - [x] `sitemap.xml` + `robots.txt`
+- [x] Validação server-side no formulário de oração (PHP)
 
 ### Próximos — Curto Prazo
 - [ ] SSL HTTPS ativo (aguardando instalação automática HostGator)
 - [ ] Trocar domínio principal no painel HostGator
 - [ ] Google Analytics 4 — preencher `$site['analytics']['ga4_id']` + tracking de eventos (CTAs, formulário de oração)
-- [ ] Validação server-side no formulário de oração (PHP)
 
 ### Futuros — Longo Prazo
 - [ ] QR Code dinâmico para PIX em `dizimos.php` (biblioteca PHP ou API)
