@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /deploy.php
+Disallow: /config/
+Disallow: /scripts/
+
+Allow: /
+
+Sitemap: https://igrejadavitoria.cabralvestecnologia.com.br/sitemap.xml

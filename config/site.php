@@ -142,6 +142,19 @@ $site = [
             'cor' => 'vermelho-escuro',
         ],
     ],
+
+    // SEO
+    'seo' => [
+        'title'       => 'Igreja da Vitória — Jaraguá, GO',
+        'description' => 'Igreja evangélica em Jaraguá-GO. Cultos às Terças, Quintas e Domingos. Palavra boa, louvor ungido e muita oração.',
+        'url'         => 'https://igrejadavitoria.cabralvestecnologia.com.br',
+        'og_image'    => 'https://igrejadavitoria.cabralvestecnologia.com.br/assets/images/logo/logo.png',
+    ],
+
+    // Analytics (GA4 — desativado até ter ID real)
+    'analytics' => [
+        'ga4_id' => '', // Ex: 'G-XXXXXXXXXX' — preencher para ativar
+    ],
 ];
 
 /**

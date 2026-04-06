@@ -15,11 +15,17 @@ require_once __DIR__ . '/../config/colors.php';
 
     <!-- Open Graph (compartilhamento em redes sociais) -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="<?php echo htmlspecialchars($site['nome']); ?>">
-    <meta property="og:description" content="<?php echo htmlspecialchars($site['slogan']); ?>">
-    <meta property="og:image" content="/assets/images/logo/logo.png">
-    <meta property="og:url" content="https://<?php echo htmlspecialchars($_SERVER['HTTP_HOST'], ENT_QUOTES); ?>">
+    <meta property="og:title" content="<?php echo htmlspecialchars($site['seo']['title']); ?>">
+    <meta property="og:description" content="<?php echo htmlspecialchars($site['seo']['description']); ?>">
+    <meta property="og:image" content="<?php echo htmlspecialchars($site['seo']['og_image']); ?>">
+    <meta property="og:url" content="<?php echo htmlspecialchars($site['seo']['url']); ?>">
     <meta property="og:locale" content="pt_BR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?php echo htmlspecialchars($site['seo']['title']); ?>">
+    <meta name="twitter:description" content="<?php echo htmlspecialchars($site['seo']['description']); ?>">
+    <meta name="twitter:image" content="<?php echo htmlspecialchars($site['seo']['og_image']); ?>">
 
     <title><?php echo htmlspecialchars($site['nome']); ?> — <?php echo htmlspecialchars($site['localizacao']['cidade']); ?></title>
 
@@ -147,4 +153,35 @@ require_once __DIR__ . '/../config/colors.php';
 
     <!-- Leaflet JS (Mapa Interativo) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+    <!-- Schema.org — Church (JSON-LD) -->
+    <script type="application/ld+json">
+        <?php
+        $schema = [
+            '@context'    => 'https://schema.org',
+            '@type'       => 'Church',
+            'name'        => $site['nome'],
+            'description' => $site['seo']['description'],
+            'url'         => $site['seo']['url'],
+            'telephone'   => $site['telefone'],
+            'address'     => [
+                '@type'           => 'PostalAddress',
+                'streetAddress'   => $site['localizacao']['endereco_completo'],
+                'addressLocality' => $site['localizacao']['cidade'],
+                'addressRegion'   => $site['localizacao']['estado'],
+                'addressCountry'  => $site['localizacao']['pais'],
+            ],
+            'geo' => [
+                '@type'     => 'GeoCoordinates',
+                'latitude'  => $site['localizacao']['latitude'],
+                'longitude' => $site['localizacao']['longitude'],
+            ],
+            'sameAs' => [
+                $site['redes_sociais']['instagram']['url'],
+                $site['redes_sociais']['youtube']['url'],
+            ],
+        ];
+        echo json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+        ?>
+    </script>
 </head>
