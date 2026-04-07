@@ -108,6 +108,11 @@
 
 ## SESSÕES ANTERIORES
 
+### 06/04/2026 — Correções de Caminhos Relativos pós-Deploy
+- `components/head.php`: corrigido caminho relativo do style.css (removida barra inicial `/`)
+- `assets/js/main.js`: corrigido caminho relativo da API (removida barra inicial `/`)
+- Deploy manual via cPanel necessário para resolver conflito de git pull no servidor
+
 ### 06/04/2026 — Fase 6: Validação Server-Side
 - `api/oracoes.php`: endpoint POST com validação, sanitização e rate limit (3 envios/hora por IP)
 - `api/.htaccess`: bloqueia acesso direto à pasta
