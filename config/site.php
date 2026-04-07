@@ -153,7 +153,7 @@ $site = [
 
     // Analytics (GA4 — desativado até ter ID real)
     'analytics' => [
-        'ga4_id' => '', // Ex: 'G-XXXXXXXXXX' — preencher para ativar
+        'ga4_id' => 'G-8PRS71W2ZP',
     ],
 ];
 
