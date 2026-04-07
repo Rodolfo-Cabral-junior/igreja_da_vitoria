@@ -42,7 +42,7 @@ require_once __DIR__ . '/../config/colors.php';
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- ✅ CSS compilado pelo Tailwind CLI (substitui o CDN) -->
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
     <!-- Leaflet CSS (Mapa Interativo) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
