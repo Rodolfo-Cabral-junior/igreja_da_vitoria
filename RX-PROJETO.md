@@ -1,6 +1,6 @@
 # RX DO PROJETO — Igreja da Vitória
-> **Status:** ✅ **100% AUDITADO & CORRIGIDO** — Validação server-side e rate limiting implementados. Em produção.
-> Última atualização: 06/04/2026 — Validação PHP, rate limiting e máscara WhatsApp adicionados ao formulário de oração.
+> **Status:** ✅ **100% AUDITADO & CORRIGIDO** — Google Analytics 4 configurado. Em produção.
+> Última atualização: 06/04/2026 — GA4 G-8PRS71W2ZP ativo em config/site.php e head.php.
 
 ---
 
@@ -14,6 +14,7 @@
 | **4 — Build & Deploy** | ✅ Completo | GitHub ✅ + HostGator ✅ + Webhook automático ✅ |
 | **5 — Otimizações SEO** | ✅ Completo | Open Graph, sitemap.xml, robots.txt, Schema.org |
 | **6 — Validação Server-Side** | ✅ Completo | Formulário de oração com validação PHP, rate limiting e máscara WhatsApp |
+| **7 — Google Analytics 4** | ✅ Completo | GA4 G-8PRS71W2ZP configurado em config/site.php e head.php |
 
 **Build:** ✅ Tailwind 39.76 KB | **JS:** ✅ main.js 166 linhas sem lixo | **PHP:** ✅ Sem erros de sintaxe
 **GitHub:** `github.com/Rodolfo-Cabral-junior/igreja_da_vitoria` — branch `main`
@@ -112,6 +113,11 @@
 - `components/head.php`: corrigido caminho relativo do style.css (removida barra inicial `/`)
 - `assets/js/main.js`: corrigido caminho relativo da API (removida barra inicial `/`)
 - Deploy manual via cPanel necessário para resolver conflito de git pull no servidor
+
+### 06/04/2026 — Fase 7: Google Analytics 4
+- `config/site.php`: ga4_id preenchido com G-8PRS71W2ZP
+- `components/head.php`: script GA4 adicionado antes do `</head>`
+- Coleta de dados ativa — primeiros dados em até 48h
 
 ### 06/04/2026 — Fase 6: Validação Server-Side
 - `api/oracoes.php`: endpoint POST com validação, sanitização e rate limit (3 envios/hora por IP)
@@ -532,11 +538,11 @@ git commit -m "type(scope): description"
 - [x] Open Graph meta tags completas (`og:image` com URL absoluta, `og:url` fixo)
 - [x] `sitemap.xml` + `robots.txt`
 - [x] Validação server-side no formulário de oração (PHP)
+- [x] Google Analytics 4 — G-8PRS71W2ZP + tracking ativo
 
 ### Próximos — Curto Prazo
 - [ ] SSL HTTPS ativo (aguardando instalação automática HostGator)
 - [ ] Trocar domínio principal no painel HostGator
-- [ ] Google Analytics 4 — preencher `$site['analytics']['ga4_id']` + tracking de eventos (CTAs, formulário de oração)
 
 ### Futuros — Longo Prazo
 - [ ] QR Code dinâmico para PIX em `dizimos.php` (biblioteca PHP ou API)
