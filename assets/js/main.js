@@ -272,7 +272,7 @@ window.redirectToWhatsApp = function (event) {
         payload.append('mensagem', msg);
         payload.append('grupo', grupo);
 
-        fetch('/api/oracoes.php', { method: 'POST', body: payload })
+        fetch('api/oracoes.php', { method: 'POST', body: payload })
             .then(function (res) { return res.json(); })
             .then(function (data) {
                 if (data.success) {
