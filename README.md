@@ -244,3 +244,4 @@ Melhorias são bem-vindas! Siga os padrões:
 - ✅ Sem inline styles (usar Tailwind)
 - ✅ ESLint passar
 - ✅ Testar em mobile & desktop
+"" 
